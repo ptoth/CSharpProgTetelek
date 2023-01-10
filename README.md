@@ -1,0 +1,2 @@
+# CSharpProgTetelek
+Programozási tételek C#
