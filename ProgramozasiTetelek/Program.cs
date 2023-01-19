@@ -17,21 +17,21 @@ namespace ProgramozasiTetelek
          * Kimenet: 
          * a megadott elemű tömb
          */
-        private static int[] tombGeneral(int elemekSzama, bool legyenNegativSzam)
+        private static int[] tombGeneral(int elemekSzama, bool neLegyenNegativSzam)
         {
             Random randomGenerator = new Random();
 
             int[] generaltTomb = new int[elemekSzama];
-            if (legyenNegativSzam)
+            if (neLegyenNegativSzam)
                 for (int i = 0; i < elemekSzama; i++)
                 {
-                    generaltTomb[i] = randomGenerator.Next(100);
+                    generaltTomb[i] = randomGenerator.Next(50);
                 }
             else
             {
                 for (int i = 0; i < elemekSzama; i++)
                 {
-                    generaltTomb[i] = randomGenerator.Next(100) - 50;
+                    generaltTomb[i] = randomGenerator.Next(50) - 50;
                 }
             }
 
@@ -50,6 +50,7 @@ namespace ProgramozasiTetelek
              */
             int s;
             int[] tomb;
+            int i;
 
             /****************************************************************************************************
              * Összegzés
@@ -65,9 +66,9 @@ namespace ProgramozasiTetelek
             */
 
             s = 0;
-            tomb = tombGeneral(10, false);
+            tomb = tombGeneral(10, true);
 
-            for (int i = 0; i < tomb.Length; i++)
+            for (i = 0; i < tomb.Length; i++)
             {
                 // aktuális elem értékének hozzáadása s-hez
                 s = s + tomb[i];
@@ -75,9 +76,10 @@ namespace ProgramozasiTetelek
             Console.WriteLine("S értéke: " + s);
 
             /****************************************************************************************************
-             * Meszámolás
+             * Megszámolás
              * Megszámolja, hogy a tömbben hány, adott tulajdonságú elem van
              * Például, negatív számok
+             * Nem kell tudni, hogy mi az értéke, azt sem, hogy hányadik helyen van, csak azt, hogy VAN!
              
              * Algoritmus
                 s:= 0
@@ -89,7 +91,7 @@ namespace ProgramozasiTetelek
             s = 0;
             tomb = tombGeneral(10, true);
 
-            for (int i = 0; i < tomb.Length; i++)
+            for (i = 0; i < tomb.Length; i++)
             {
                 // aktuális elem vizsgálata
                 if (tomb[i] < 0)
@@ -116,7 +118,7 @@ namespace ProgramozasiTetelek
              */
             s = 0;
             tomb = tombGeneral(20, false);
-            int i = 1;
+            i = 1;
             while (i < tomb.Length && tomb[i] != 50)
             {
                 i = i + 1;
@@ -124,6 +126,10 @@ namespace ProgramozasiTetelek
             if (i <= tomb.Length)
             {
                 Console.WriteLine("Megtaláltam a keresett elemet!");
+            }
+            else
+            {
+                Console.WriteLine("Nincs a feltételnek megfelelő elem");
             }
 
             /****************************************************************************************************
@@ -137,9 +143,21 @@ namespace ProgramozasiTetelek
                     i:= i + 1
                 Ciklus vége
                 ki: i
-             */
+             */   
 
+            i = 0;
+            tomb = tombGeneral(20, true);
+            tomb[0] = 50;
+            while (tomb[i] != 50)
+            {
+                i = i + 1;
+                Console.WriteLine(i);
+                Console.WriteLine(tomb[i]);
+            }
+            Console.WriteLine("A keresett elem a sorban a következő helyet foglalja el: " + (i+1));
 
+            /****************************************************************************************************
+            /*Folyt **/
 
             /****************************************************************************************************
              * Keresés
@@ -155,9 +173,22 @@ namespace ProgramozasiTetelek
                     ki: i
                 különben
                     ki: -1 // bármilyen más érvénytelen index
+             
              */
 
+            i = 0;
+            tomb = tombGeneral(20, false);
+            while (i <= tomb.Length && tomb[i] != 50)
+            {
+                i = i + 1;
+            }
 
+            if (i <= tomb.Length)
+            {
+                Console.WriteLine("A keresett elem helye: " + i + "és értéke: " + tomb[i]);
+            } else
+                Console.WriteLine("A keresett elem nem található");
+            
             /****************************************************************************************************
              * Kiválogatás
              * ­Ez az algoritmus egy tömb bizonyos tulajdonságú elemeit teszi egy másik tömbbe.
@@ -296,6 +327,21 @@ namespace ProgramozasiTetelek
                     Ciklus vége
                 Ciklus vége
              */
+
+
+            /****************************************************************************************************
+                Gyakorlás
+             */
+
+            Random veletlenGenerator = new Random();
+
+            int[] generaltSzamok = new int[20];
+
+            for (i = 0; i < generaltSzamok.Length; i++)
+            {
+                generaltSzamok[i] = veletlenGenerator.Next(100)-75;
+                Console.WriteLine(generaltSzamok[i]);
+            }
 
         }
     }
